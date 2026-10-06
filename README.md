@@ -1,6 +1,6 @@
-# gentoo-wm-configs
+# simple-linux-configs
 
-Clean default configs for a handful of Wayland compositors (and one X11 WM),
+The configs of [Simple Linux](https://github.com/tarilka0gg/simple-linux), installed by its installer into the new user's home: clean defaults for a handful of Wayland compositors (and one X11 WM),
 all paired with [Noctalia](https://github.com/noctalia-dev/noctalia-shell) as
 the shell/bar, and a login-shell template that launches whichever one you
 picked.
@@ -8,7 +8,8 @@ picked.
 ## Layout
 
 ```
-gentoo-wm-configs/
+simple-linux-configs/
+├── fish/                    # the author's fish: tide prompt, fisher, sponge, autopair (see below)
 ├── niri/config.kdl          # scrollable-tiling compositor
 ├── hyprland/hyprland.conf   # animated tiling compositor
 ├── sway/config               # i3-compatible tiling compositor
@@ -98,3 +99,16 @@ sed 's/{{LAUNCH_CMD}}/niri-session/' bash_profile.tmpl > ~/.bash_profile
 - Each compositor's own wiki/docs are linked at the top of its config file.
 - These are deliberately *clean defaults* — a starting point for a fresh
   install, not a fully personalized dotfiles dump.
+
+## fish
+
+`fish/` is copied to `~/.config/fish` of the new user when the system has fish (the Simple Linux stage does). It is the author's own setup
+with his machine-specific parts left out (his local tools and paths, proxies and tokens are not in it; every alias checks that its tool exists):
+
+- `conf.d/tide-config.fish`: his [tide](https://github.com/IlanCosman/tide) v6.1.1 prompt, the `tide_*` variables exported as globals, so the prompt is
+  the same on a fresh home without running `tide configure` (which still works; variables set in this file win over its answers).
+- `functions/`, `conf.d/_tide_init.fish`, `completions/`: tide, [fisher](https://github.com/jorgebucaran/fisher), [sponge](https://github.com/meaningful-ooo/sponge)
+  and [autopair](https://github.com/jorgebucaran/autopair.fish), copied as they were installed (all MIT). `fish_plugins` lists them, so `fisher update` works.
+- `config.fish`: no greeting, `eza`/`micro`/`dust`/`gping`/`doas` aliases, `zoxide` and `fzf` hooks, `fastfetch` on the first prompt; all guarded.
+
+tide draws its icons with a **Nerd Font**. The Linux console (tty) cannot show them; use a terminal with one (for example ghostty with a Nerd Font) for the intended look.
