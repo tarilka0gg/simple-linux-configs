@@ -86,17 +86,19 @@ recursive                  = true    # include subdirectories when picking rando
 # ── Theme ─────────────────────────────────────────────────────────────────────
 
 [theme]
-mode   = "dark"                     # dark | light | auto
-source = "builtin"                  # builtin | wallpaper | community
+mode   = "light"                    # dark | light | auto
+source = "wallpaper"                # builtin | wallpaper | community: the palette is generated from the current wallpaper
 builtin = "Noctalia"                 # Ayu | Catppuccin | Dracula | Eldritch | Gruvbox |
                                     # Kanagawa | Noctalia | Nord | Rosé Pine | Tokyo-Night
-# wallpaper_scheme  = "m3-content"  # m3-tonal-spot | m3-content | m3-fruit-salad |
+wallpaper_scheme  = "m3-tonal-spot" # m3-tonal-spot | m3-content | m3-fruit-salad |
                                     # m3-rainbow | m3-monochrome | vibrant | faithful |
                                     # dysfunctional | muted
 
 [theme.templates]
 enable_builtin_templates            = true
-builtin_ids                = []     # opt-in; list ids with: noctalia theme --list-templates
+# Programs that follow the palette. Each one needs its own starting config in ~/.config (see apps/); GTK 3/4 apps (Thunar,
+# GParted, GIMP) are handled by the hook itself.
+builtin_ids                = ["ghostty", "btop", "gtk3", "gtk4"]  # all ids: noctalia theme --list-templates
 enable_community_templates = true
 community_ids              = []     # fetched from api.noctalia.dev/templates, cached locally
 
