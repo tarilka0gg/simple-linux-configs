@@ -31,6 +31,8 @@ cursor {
 }
 
 layout {
+    // Black until Noctalia has drawn the wallpaper (the compositor's own default is a dark blue, a flash of the wrong colour).
+    background-color "#000000"
     gaps 10
     center-focused-column "never"
 
@@ -46,8 +48,6 @@ layout {
 
     border {
         width 2
-        active-color "#7aa2f7"
-        inactive-color "#565f89"
     }
 
     focus-ring {
@@ -69,7 +69,9 @@ environment {
 }
 
 spawn-at-startup "xwayland-satellite"
-spawn-at-startup "noctalia"
+// Noctalia starts through a script that picks the wallpaper first: its first render is then already the wallpaper's palette,
+// instead of the default theme for a moment.
+spawn-at-startup "bash" "-c" "exec bash ~/.config/noctalia/hooks/start.sh"
 
 binds {
     Mod+Tab repeat=false { toggle-overview; }
@@ -136,3 +138,7 @@ binds {
     XF86AudioNext { spawn "noctalia" "msg" "media-next"; }
     XF86AudioPrev { spawn "noctalia" "msg" "media-previous"; }
 }
+
+// Colours of the focus ring, the border, the insert hint and the tab indicator: written by Noctalia from the wallpaper's palette
+// (the niri template in noctalia/config.toml). An empty file until it has.
+include "noctalia.kdl"
