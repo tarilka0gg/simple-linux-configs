@@ -100,7 +100,7 @@ enable_builtin_templates            = true
 # GParted, GIMP) are handled by the hook itself.
 builtin_ids                = ["ghostty", "btop", "gtk3", "gtk4"]  # all ids: noctalia theme --list-templates
 enable_community_templates = true
-community_ids              = []     # fetched from api.noctalia.dev/templates, cached locally
+community_ids              = ["micro", "tmux", "fastfetch", "gimp"]  # fetched from api.noctalia.dev/templates, cached locally
 
 # User-defined templates are declared directly in config.
 # [theme.templates.user.my_app]
@@ -407,9 +407,9 @@ enabled = false
 [hooks]
 battery_low_percent_threshold = 0   # set to e.g. 15 to enable battery_under_threshold hook
 
-# started           = "notify-send 'Noctalia' 'Shell started'"
+started           = "bash ~/.config/noctalia/hooks/started.sh"       # a random wallpaper from ~/Pictures/Wallpapers
+colors_changed    = "bash ~/.config/noctalia/hooks/colors-changed.sh" # runs hooks/colors.d/*.sh after every palette change
 # wallpaper_changed = []
-# colors_changed    = []
 # theme_mode_changed = "notify-send 'Noctalia' \"Theme mode: $NOCTALIA_THEME_MODE\""
 # session_locked    = []
 # session_unlocked  = []
