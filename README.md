@@ -10,7 +10,7 @@ picked.
 ```
 simple-linux-configs/
 ├── fish/                    # the author's fish: tide prompt, fisher, sponge, autopair (see below)
-├── niri/config.kdl          # scrollable-tiling compositor
+├── niri/config.kdl          # scrollable-tiling compositor; its ring/border colours come from Noctalia (niri/noctalia.kdl, empty until written)
 ├── hyprland/hyprland.conf   # animated tiling compositor
 ├── sway/config               # i3-compatible tiling compositor
 ├── scroll/config              # Sway fork, PaperWM-style single scrolling layout
@@ -18,6 +18,9 @@ simple-linux-configs/
 ├── mangowc/config.conf          # tiling compositor
 ├── triad/config.kdl              # layout manager running inside River (Nim)
 ├── dwl/config.h                    # suckless-style compositor — config.h, not a runtime file
+├── noctalia/config.toml                # the shared shell config: theme from the wallpaper, templates, hooks
+├── noctalia/hooks/                       # start.sh (wallpaper first, then Noctalia), started.sh, colors-changed.sh, colors.d/
+├── apps/                                   # starting configs (ghostty, btop, tmux, fastfetch) that Noctalia's hooks edit
 └── bash_profile.tmpl                  # login-shell template, execs the chosen session on tty1
 ```
 
@@ -29,6 +32,20 @@ at the top of `dwl/config.h`).
 
 `noctalia/config.toml` is the shared shell config used by every WM/compositor
 here — same file regardless of which one is running under it.
+
+## The wallpaper's colours, everywhere
+
+The palette is generated from the current wallpaper (`[theme]`: `source = "wallpaper"`, Material You `m3-tonal-spot`, light). Noctalia
+writes a themed file for every program whose template is switched on (`[theme.templates]`): niri (focus ring, border), ghostty, btop,
+GTK 3/4 (Thunar, GParted, GIMP; the hook switches the GTK theme to `adw-gtk3`, which must be installed, plain Adwaita ignores the palette)
+and, fetched from api.noctalia.dev on the first run, micro, tmux, fastfetch and GIMP. The hooks Noctalia ships (`apply.sh`) only *edit* an
+existing config to select that theme, so `apps/` carries the starting configs; see [APPS.md](APPS.md) for what each program needs and which ones
+are left out.
+
+Startup: `niri/config.kdl` starts Noctalia through `noctalia/hooks/start.sh`, which picks a random wallpaper from `~/Pictures/Wallpapers`
+and writes it as the default *before* Noctalia starts, so the first render is already that wallpaper's palette (no flash of the built-in
+theme). `[hooks]` `started` applies the templates once more after the community ones were fetched (first start only); `colors_changed` runs
+every script in `noctalia/hooks/colors.d/` after each palette change, for anything that has no template.
 
 ## Compositors
 
