@@ -1,0 +1,11 @@
+/* GTK 4 programs. noctalia.css (written by Noctalia from the wallpaper) defines libadwaita's colours: window, headerbar, cards, accent. */
+@import url("noctalia.css");
+
+/* Portage Store's category tiles are fixed gradients (purple, cream, pink, red, green, grey) that ignore the theme; here they are
+   shades of the wallpaper's accent colour and its window colour instead. */
+.category-tile-0 { background-image: linear-gradient(160deg, @accent_bg_color, mix(@accent_bg_color, @window_bg_color, 0.35)); color: @accent_fg_color; }
+.category-tile-1 { background-image: linear-gradient(160deg, mix(@accent_bg_color, @window_bg_color, 0.25), mix(@accent_bg_color, @window_bg_color, 0.55)); color: @accent_fg_color; }
+.category-tile-2 { background-image: linear-gradient(120deg, @accent_bg_color, mix(@accent_bg_color, @window_fg_color, 0.3)); color: @accent_fg_color; }
+.category-tile-3 { background-image: linear-gradient(120deg, @destructive_bg_color, mix(@destructive_bg_color, @window_bg_color, 0.35)); color: @destructive_fg_color; }
+.category-tile-4 { background-image: linear-gradient(160deg, mix(@accent_bg_color, @window_fg_color, 0.2), mix(@accent_bg_color, @window_bg_color, 0.2)); color: @accent_fg_color; }
+.category-tile-5 { background-image: linear-gradient(160deg, mix(@window_fg_color, @window_bg_color, 0.55), mix(@window_fg_color, @window_bg_color, 0.7)); color: @window_bg_color; }
