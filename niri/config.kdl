@@ -65,6 +65,8 @@ window-rule {
 environment {
     XDG_CURRENT_DESKTOP "niri"
     QT_QPA_PLATFORM "wayland"
+    // Qt programs read their colours from qt6ct, whose colour file Noctalia writes from the wallpaper (the `qt` template).
+    QT_QPA_PLATFORMTHEME "qt6ct"
     ELECTRON_OZONE_PLATFORM_HINT "auto"
 }
 

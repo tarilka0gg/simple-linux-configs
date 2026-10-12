@@ -5,6 +5,18 @@
 # remembers it, and what it remembers wins over this default).
 cfg="${XDG_CONFIG_HOME:-$HOME/.config}/noctalia/config.toml"
 dir="$HOME/Pictures/Wallpapers"
+# Qt programs: qt6ct has to be told to use the colour file Noctalia writes (the path must be absolute).
+qt="${XDG_CONFIG_HOME:-$HOME/.config}/qt6ct/qt6ct.conf"
+if [ ! -f "$qt" ]; then
+    mkdir -p "$(dirname "$qt")"
+    printf '[Appearance]\ncolor_scheme_path=%s/qt6ct/colors/noctalia.conf\ncustom_palette=true\nstyle=Fusion\n' "${XDG_CONFIG_HOME:-$HOME/.config}" > "$qt"
+fi
+# Zen has no profile until it has been started once; its template only edits one that exists, so apply it again at every start
+# (idempotent), and the browser follows from its next start.
+zen="${XDG_STATE_HOME:-$HOME/.local/state}/noctalia/community-templates/zen-browser/apply.sh"
+if [ -f "$zen" ] && { [ -d "${XDG_CONFIG_HOME:-$HOME/.config}/zen" ] || [ -d "$HOME/.zen" ]; }; then
+    bash "$zen" >/dev/null 2>&1 || true
+fi
 # The hooks of Noctalia's templates only edit a program's config that already exists. A system without these starting configs (an
 # older image, a home made by hand) would keep the program's default colours for ever: make the one that matters most.
 gh="${XDG_CONFIG_HOME:-$HOME/.config}/ghostty/config"
