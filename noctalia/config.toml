@@ -271,13 +271,13 @@ tab_previous = ["shift+iso_left_tab"]
 
 [bar.main]
 position           = "top"          # top | bottom | left | right
-thickness          = 34
+thickness          = 32
 background_opacity = 1.0
 radius             = 12
-margin_h           = 180
-margin_v           = 10
+margin_ends           = 180
+margin_edge           = 10
 padding            = 14
-widget_spacing     = 6
+widget_spacing     = 8
 scale              = 1.0
 shadow             = true
 auto_hide          = false
@@ -289,9 +289,57 @@ capsule            = false
 # capsule_opacity  = 1.0
 # capsule_border   = "outline"      # uncomment for a border on all widgets
 
-start  = ["launcher", "wallpaper", "workspaces"]
-center = ["clock"]
-end    = ["media", "tray", "notifications", "clipboard", "network", "bluetooth", "volume", "brightness", "battery", "control-center", "session"]
+# The bar of the author's own machine: four capsules (brightness/launcher/wallpaper, media/clock/date/workspaces, tray/clipboard,
+# network/bluetooth/battery/session) floating over the wallpaper, the volume widget outside them.
+start  = ["group:g3"]
+center = ["group:g4"]
+end    = ["group:g2", "group:g1", "volume"]
+
+[[bar.main.capsule_group]]
+id = "g1"
+members = ["network", "bluetooth", "battery", "session"]
+fill = "surface_variant"
+opacity = 1.0
+padding = 6.0
+
+[[bar.main.capsule_group]]
+id = "g2"
+members = ["tray", "clipboard"]
+fill = "surface_variant"
+opacity = 1.0
+padding = 6.0
+
+[[bar.main.capsule_group]]
+id = "g3"
+members = ["brightness", "launcher", "wallpaper"]
+fill = "surface_variant"
+opacity = 1.0
+padding = 6.0
+
+[[bar.main.capsule_group]]
+id = "g4"
+members = ["media", "spacer_3", "clock", "date", "workspaces", "spacer_2"]
+fill = "surface_variant"
+opacity = 1.0
+padding = 6.0
+
+[widget.media]
+hide_when_no_media = true
+
+[widget.spacer_2]
+type = "spacer"
+
+[widget.spacer_3]
+type = "spacer"
+
+[widget.volume]
+show_label = false
+
+[widget.network]
+show_label = false
+
+[widget.brightness]
+show_label = false
 
 # Commands for the bar margin outside widget sections (dead zone):
 # [bar.main.dead_zone]
@@ -323,8 +371,7 @@ radius_top_left     = 16
 radius_top_right    = 16
 radius_bottom_left  = 16
 radius_bottom_right = 16
-margin_h            = 0
-margin_v            = 8
+margin_edge         = 8
 shadow              = true
 show_running        = true
 auto_hide           = false
