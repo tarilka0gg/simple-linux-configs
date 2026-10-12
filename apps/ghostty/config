@@ -1,3 +1,7 @@
 # Ghostty. The colours come from Noctalia: it writes ~/.config/ghostty/themes/noctalia from the wallpaper's palette every time the
-# palette changes, and its hook (ghostty/apply.sh) needs this file to exist and name that theme.
+# palette changes (its hook, ghostty/apply.sh, needs this file to exist and name the theme, then reloads running windows).
 theme = noctalia
+# The theme file is plain ghostty config, so it is loaded once more here: ghostty loads config-file entries after the rest of this file,
+# which makes the wallpaper's colours win over any colour set by hand above or in a later edit. `?` = no error while the file is not
+# there yet (the very first moments of the first start).
+config-file = ?themes/noctalia

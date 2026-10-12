@@ -5,6 +5,15 @@
 # remembers it, and what it remembers wins over this default).
 cfg="${XDG_CONFIG_HOME:-$HOME/.config}/noctalia/config.toml"
 dir="$HOME/Pictures/Wallpapers"
+# The hooks of Noctalia's templates only edit a program's config that already exists. A system without these starting configs (an
+# older image, a home made by hand) would keep the program's default colours for ever: make the one that matters most.
+gh="${XDG_CONFIG_HOME:-$HOME/.config}/ghostty/config"
+if ! grep -qE '^config-file *= *\?themes/noctalia' "$gh" 2>/dev/null; then
+    mkdir -p "$(dirname "$gh")"
+    grep -qE '^theme *= *noctalia' "$gh" 2>/dev/null || sed -i -E '/^theme *=/d' "$gh" 2>/dev/null
+    grep -qE '^theme *= *noctalia' "$gh" 2>/dev/null || echo 'theme = noctalia' >> "$gh"
+    echo 'config-file = ?themes/noctalia' >> "$gh"
+fi
 pick=$(find -L "$dir" -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) 2>/dev/null | shuf -n 1)
 if [ -n "$pick" ] && [ -f "$cfg" ]; then
     python3 - "$cfg" "$pick" <<'PY'
