@@ -10,7 +10,7 @@
     "color": { "keys": "white", "title": "light_black" }
   },
   "modules": [
-    "title",
+    { "type": "title", "format": "{user-name}@simplelinux" },
     "separator",
     { "type": "os", "format": "Simple Linux" },
     "kernel",
