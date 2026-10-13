@@ -3,22 +3,40 @@
   "logo": {
     "type": "file",
     "source": "~/.config/fastfetch/simple-linux.txt",
-    "color": { "1": "white", "2": "light_black", "3": "red", "4": "black" },
-    "padding": { "left": 2, "right": 3 }
+    "color": {
+      "1": "white",
+      "2": "light_black",
+      "3": "red",
+      "4": "black"
+    },
+    "padding": {
+      "left": 2,
+      "right": 3
+    }
   },
   "display": {
-    "color": { "keys": "white", "title": "light_black" }
+    "color": {
+      "keys": "white",
+      "title": "light_black"
+    }
   },
   "modules": [
-    { "type": "title", "format": "{user-name}@simplelinux" },
+    {
+      "type": "title",
+      "format": "{user-name}@simplelinux"
+    },
     "separator",
-    { "type": "os", "format": "Simple Linux" },
-    "kernel",
-    "uptime",
+    {
+      "type": "os",
+      "format": "Simple Linux"
+    },
+    {
+      "type": "command",
+      "key": "System Age",
+      "text": "f=/var/log/emerge.log; [ -r $f ] || { echo unknown; exit; }; epoch=$(head -1 $f | cut -d: -f1); echo \"$(( ($(date +%s) - epoch) / 86400 )) days\""
+    },
     "packages",
-    "shell",
     "wm",
-    "terminal",
     "separator",
     "display",
     "cpu",
