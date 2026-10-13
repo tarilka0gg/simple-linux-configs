@@ -42,7 +42,10 @@
     "cpu",
     "gpu",
     "memory",
-    "disk",
+    {
+      "type": "disk",
+      "folders": "/:/home"
+    },
     "separator",
     "colors"
   ]
