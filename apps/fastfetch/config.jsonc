@@ -1,3 +1,31 @@
 {
-  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json"
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "type": "file",
+    "source": "~/.config/fastfetch/simple-linux.txt",
+    "color": { "1": "white", "2": "light_black", "3": "red", "4": "black" },
+    "padding": { "left": 2, "right": 3 }
+  },
+  "display": {
+    "color": { "keys": "white", "title": "light_black" }
+  },
+  "modules": [
+    "title",
+    "separator",
+    { "type": "os", "format": "Simple Linux" },
+    "kernel",
+    "uptime",
+    "packages",
+    "shell",
+    "wm",
+    "terminal",
+    "separator",
+    "display",
+    "cpu",
+    "gpu",
+    "memory",
+    "disk",
+    "separator",
+    "colors"
+  ]
 }
