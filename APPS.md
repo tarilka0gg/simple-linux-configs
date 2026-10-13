@@ -15,7 +15,7 @@ something to edit. Which templates run is `[theme.templates]` in `noctalia/confi
 | Qt programs (VLC, qt6ct-aware apps) | built-in `qt` and `kcolorscheme`; niri sets `QT_QPA_PLATFORMTHEME=qt6ct`, `hooks/start.sh` writes `qt6ct.conf` pointing at Noctalia's colour file | `gui-apps/qt6ct` |
 | yazi, fuzzel | community templates; their hooks create `theme.toml` / `fuzzel.ini` themselves | `app-misc/yazi`, `gui-apps/fuzzel` |
 | micro, tmux, GIMP | community templates | tmux: `apps/` |
-| fastfetch | no template on purpose: the Simple Linux snake keeps the terminal palette colours (white, light black), eyes black, tongue red | `apps/fastfetch` |
+| fastfetch | no Noctalia template on purpose (it recolours at full strength): `hooks/colors.d/20-fastfetch.sh` keeps the terminal's white and light black and mixes in only 10% of the accent; eyes black, tongue red | `apps/fastfetch` |
 | Neovim | community template writes `nvim/lua/matugen.lua`; its hook adds the base16 plugin only to a lazy.nvim setup | lazy.nvim |
 | Zen | community template writes `userChrome.css`/`userContent.css` into a Zen profile; `hooks/start.sh` applies it again at every start, so it takes effect once Zen has been started once and restarted | a Zen profile |
 | Telegram | the template writes `~/.config/telegram-desktop/themes/noctalia.tdesktop-theme`; choosing it is a step in Telegram's own settings (Chat settings, Choose from file) that cannot be scripted | one click |

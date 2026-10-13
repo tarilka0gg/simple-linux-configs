@@ -20,7 +20,7 @@ simple-linux-configs/
 ├── dwl/config.h                    # suckless-style compositor — config.h, not a runtime file
 ├── noctalia/config.toml                # the shared shell config: theme from the wallpaper, templates, hooks
 ├── noctalia/hooks/                       # start.sh (wallpaper first, then Noctalia), started.sh, colors-changed.sh, colors.d/
-├── apps/                                   # starting configs (ghostty, btop, tmux) that Noctalia's hooks edit, and fastfetch (the Simple Linux logo, not themed)
+├── apps/                                   # starting configs (ghostty, btop, tmux) that Noctalia's hooks edit, and fastfetch (the Simple Linux logo, 10% themed by `colors.d/20-fastfetch.sh`)
 └── bash_profile.tmpl                  # login-shell template, execs the chosen session on tty1
 ```
 
@@ -38,7 +38,7 @@ here — same file regardless of which one is running under it.
 The palette is generated from the current wallpaper (`[theme]`: `source = "wallpaper"`, Material You `m3-tonal-spot`, light). Noctalia
 writes a themed file for every program whose template is switched on (`[theme.templates]`): niri (focus ring, border), ghostty, btop,
 GTK 3/4 (Thunar, GParted, GIMP; the hook switches the GTK theme to `adw-gtk3`, which must be installed, plain Adwaita ignores the palette)
-and, fetched from api.noctalia.dev on the first run, micro, tmux and GIMP (fastfetch keeps its own colours). The hooks Noctalia ships (`apply.sh`) only *edit* an
+and, fetched from api.noctalia.dev on the first run, micro, tmux and GIMP (fastfetch: only 10% of the accent, see `hooks/colors.d/20-fastfetch.sh`). The hooks Noctalia ships (`apply.sh`) only *edit* an
 existing config to select that theme, so `apps/` carries the starting configs; see [APPS.md](APPS.md) for what each program needs and which ones
 are left out.
 
