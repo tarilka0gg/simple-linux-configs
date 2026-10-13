@@ -358,7 +358,7 @@ show_label = false
 # ── Dock ──────────────────────────────────────────────────────────────────────
 
 [dock]
-enabled             = false         # set true to activate
+enabled             = true
 position            = "bottom"      # top | bottom | left | right
 icon_size           = 48
 main_axis_padding   = 16
@@ -386,7 +386,7 @@ show_instance_count = true
 launcher_position   = "none"       # none | start | end
 launcher_icon       = "grid-dots"  # Tabler glyph name
 active_monitor_only = false
-pinned              = []            # e.g. ["firefox", "code", "kitty"]
+pinned              = ["com.mitchellh.ghostty", "zen"]
 
 # ── Desktop Widgets ───────────────────────────────────────────────────────────
 
