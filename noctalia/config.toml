@@ -99,7 +99,7 @@ enable_builtin_templates            = true
 # GParted, GIMP) are handled by the hook itself.
 builtin_ids                = ["niri", "ghostty", "btop", "gtk3", "gtk4", "qt", "kcolorscheme"]  # all ids: noctalia theme --list-templates
 enable_community_templates = true
-community_ids              = ["micro", "tmux", "fastfetch", "gimp", "yazi", "fuzzel", "neovim", "telegram", "zen-browser"]  # fetched from api.noctalia.dev/templates, cached locally
+community_ids              = ["micro", "tmux", "gimp", "yazi", "fuzzel", "neovim", "telegram", "zen-browser"]  # fetched from api.noctalia.dev/templates, cached locally
 
 # User-defined templates are declared directly in config.
 # [theme.templates.user.my_app]
