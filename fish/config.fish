@@ -29,7 +29,7 @@ if status is-interactive
 
     # fastfetch on the first prompt, cleared again when the first command is typed
     if command -q fastfetch
-        # tui-shim (when installed): micro and nvim get the file-picker badge, TUI apps get launcher entries. Once per user, in the background.
+        # tui-shim (when installed): micro and nvim get the file-picker badge, TUI apps get launcher entries. No theme files: Noctalia colours micro, btop and yazi itself. Once per user, in the background.
         if command -q tui-shim; and not test -e ~/.config/tui-shim/setup-done
             mkdir -p ~/.config/tui-shim
             tui-shim shims install >/dev/null 2>&1
