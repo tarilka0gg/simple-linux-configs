@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # tui-shim draws its file picker and the folder badge in one palette file. This hook writes it, ~/.config/tui-shim/palette.md, from the ghostty
 # theme Noctalia makes out of the wallpaper, so the picker follows the wallpaper too. tui-shim's own themes for micro, btop and yazi are never
-# applied (`sync --no-theme`): those programs are coloured by Noctalia's templates.
+# applied for btop and yazi (`sync --no-theme`): Noctalia's own templates colour those. micro's Noctalia template is a community one that is only there after
+# a download, so until it is, micro gets tui-shim's scheme made from the same palette.
 cfg="${XDG_CONFIG_HOME:-$HOME/.config}"
 theme="$cfg/ghostty/themes/noctalia"; out="$cfg/tui-shim/palette.md"
 [ -f "$theme" ] || exit 0
@@ -42,4 +43,13 @@ tmp=$(mktemp) || exit 0
     done
 } > "$tmp" && cat "$tmp" > "$out"
 rm -f "$tmp"
+if command -v tui-shim >/dev/null && [ ! -f "$cfg/micro/colorschemes/noctalia.micro" ]; then
+    tui-shim theme micro >/dev/null 2>&1
+fi
+# the line-drawn icons tui-shim makes for programs that have none (marked, so real icons are never touched) take the new palette
+if command -v tui-shim >/dev/null; then
+    grep -l 'tui-shim-glyph' "$HOME"/.local/share/icons/hicolor/scalable/apps/tui-shim-*.svg 2>/dev/null | xargs -r rm -f
+    rm -f "$HOME"/.cache/tui-shim/icons/*.svg
+    tui-shim sync --no-theme --offline >/dev/null 2>&1
+fi
 exit 0
