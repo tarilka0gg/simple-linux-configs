@@ -50,6 +50,6 @@ fi
 if command -v tui-shim >/dev/null; then
     grep -l 'tui-shim-glyph' "$HOME"/.local/share/icons/hicolor/scalable/apps/tui-shim-*.svg 2>/dev/null | xargs -r rm -f
     rm -f "$HOME"/.cache/tui-shim/icons/*.svg
-    tui-shim sync --no-theme --offline >/dev/null 2>&1
+    TUI_SHIM_LINE_ICONS=1 tui-shim sync --no-theme --offline >/dev/null 2>&1
 fi
 exit 0
