@@ -20,7 +20,7 @@ simple-linux-configs/
 ├── dwl/config.h                    # suckless-style compositor — config.h, not a runtime file
 ├── noctalia/config.toml                # the shared shell config: theme from the wallpaper, templates, hooks
 ├── noctalia/hooks/                       # start.sh (wallpaper first, then Noctalia), started.sh, colors-changed.sh, colors.d/
-├── apps/                                   # starting configs (ghostty, btop, tmux) that Noctalia's hooks edit, and fastfetch (the Simple Linux logo, 10% themed by `colors.d/20-fastfetch.sh`)
+├── apps/                                   # starting configs (ghostty, btop, tmux, gtk-4.0) that Noctalia's hooks edit, tui-shim's starting palette, and fastfetch (the Simple Linux logo in a big and a small braille version, 10% themed by `colors.d/20-fastfetch.sh`)
 └── bash_profile.tmpl                  # login-shell template, execs the chosen session on tty1
 ```
 
@@ -45,7 +45,14 @@ are left out.
 Startup: `niri/config.kdl` starts Noctalia through `noctalia/hooks/start.sh`, which picks a random wallpaper from `~/Pictures/Wallpapers`
 and writes it as the default *before* Noctalia starts, so the first render is already that wallpaper's palette (no flash of the built-in
 theme). `[hooks]` `started` applies the templates once more after the community ones were fetched (first start only); `colors_changed` runs
-every script in `noctalia/hooks/colors.d/` after each palette change, for anything that has no template.
+every script in `noctalia/hooks/colors.d/` after each palette change, for anything that has no template:
+
+- `20-fastfetch.sh` mixes 10% of the accent into the fastfetch logo's colours;
+- `30-tui-shim.sh` writes `~/.config/tui-shim/palette.md` from the ghostty theme Noctalia made (what [tui-shim](https://github.com/tarilka0gg/tui-shim)'s file picker, folder badge and
+  line-drawn launcher icons are drawn in), colours micro from the same palette while Noctalia's own micro template is not there, and redraws the icons.
+
+Both only run when `config.toml` registers them: its `[hooks]` has `started` and `colors_changed` set. A saved personal Noctalia config usually has those lines commented out;
+Simple Linux's image setup puts them back, and anyone using these files with their own config has to set them.
 
 ## Compositors
 
@@ -126,6 +133,8 @@ with his machine-specific parts left out (his local tools and paths, proxies and
   the same on a fresh home without running `tide configure` (which still works; variables set in this file win over its answers).
 - `functions/`, `conf.d/_tide_init.fish`, `completions/`: tide, [fisher](https://github.com/jorgebucaran/fisher), [sponge](https://github.com/meaningful-ooo/sponge)
   and [autopair](https://github.com/jorgebucaran/autopair.fish), copied as they were installed (all MIT). `fish_plugins` lists them, so `fisher update` works.
-- `config.fish`: no greeting, `eza`/`micro`/`dust`/`gping`/`doas` aliases, `zoxide` and `fzf` hooks, `fastfetch` on the first prompt; all guarded.
+- `config.fish`: no greeting, `eza`/`micro`/`dust`/`gping`/`doas` aliases, `zoxide` and `fzf` hooks; all guarded. `~/.local/bin` comes first in `PATH` (tui-shim's shims).
+  On the first prompt of a terminal it waits for the window to reach its final width, then shows `fastfetch` with the big logo, or the small one when the terminal is under
+  100 columns or 32 lines, and clears the screen when the first command is run (an empty Enter does not count). The first time for a user it also sets tui-shim up (shims, launchers, line icons) in the background.
 
 tide draws its icons with a **Nerd Font**. The Linux console (tty) cannot show them; use a terminal with one (for example ghostty with a Nerd Font) for the intended look.
