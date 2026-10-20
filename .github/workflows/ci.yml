@@ -1,0 +1,13 @@
+name: CI
+on:
+  push:
+  pull_request:
+jobs:
+  shell:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Shell syntax and ShellCheck (errors only)
+        run: |
+          files=$(git ls-files '*.sh' | tr '\n' ' ')
+          [ -z "$files" ] || { for f in $files; do bash -n "$f"; done; shellcheck --severity=error $files; }
